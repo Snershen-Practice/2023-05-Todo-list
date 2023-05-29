@@ -32,9 +32,7 @@ function filterUndo(data) {
   const finArr = data.filter((item) => {
     return item.isDone === false;
   });
-  console.log(finArr);
   numText.textContent = finArr.length;
-  console.log(finArr);
 }
 
 //初始化
@@ -111,8 +109,12 @@ function addData(data) {
 //事件：新增待辦事項
 addBtn.addEventListener("click", function () {
   addData(tempData);
-  renderData(tempData);
   input.value = "";
+  Array.from(filterBtn.children).forEach((childBtn) => {
+    childBtn.classList.remove("active");
+  });
+  Array.from(filterBtn.children)[0].classList.add("active");
+  renderData(tempData);
 });
 
 //事件：刪除所有事項

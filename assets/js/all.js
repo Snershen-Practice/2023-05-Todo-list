@@ -18,7 +18,7 @@ function renderData(data) {
   data.forEach((item, index) => {
     str += `<li>
     <label class="checkbox" for="">
-      <input type="checkbox" data-value="${item.content}"/>
+      <input type="checkbox" data-value="${item.content}" ${item.isDone ? "checked" : ""}/>
       <span>${item.content}</span>
     </label>
     <a href="#" class="delete" data-num="${index}"><span class="material-symbols-outlined"> close </span></a>
@@ -40,7 +40,6 @@ renderData(allData);
 filterUndo(allData);
 
 filterBtn.addEventListener("click", (e) => {
-  console.log(e.target.textContent);
   //切換頁籤樣式
   if (e.target.nodeName === "LI") {
     Array.from(filterBtn.children).forEach((childBtn) => {
@@ -81,6 +80,7 @@ list.addEventListener("click", function (e) {
         }
       });
       filterUndo(allData);
+      renderData(tempData);
     } else if (!e.target.checked) {
       allData.forEach((item) => {
         if (item.content === e.target.dataset.value) {
@@ -88,6 +88,7 @@ list.addEventListener("click", function (e) {
         }
       });
       filterUndo(allData);
+      renderData(tempData);
     }
   }
   //刪除待辦事項
@@ -123,6 +124,5 @@ removeAllBtn.addEventListener("click", function () {
   tempData = tempData.filter((item) => {
     return item.isDone === false;
   });
-  console.log(tempData);
   renderData(tempData);
 });

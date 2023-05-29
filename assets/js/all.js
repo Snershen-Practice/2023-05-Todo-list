@@ -116,6 +116,7 @@ addBtn.addEventListener("click", function () {
   });
   Array.from(filterBtn.children)[0].classList.add("active");
   renderData(tempData);
+  filterUndo(tempData);
 });
 
 //事件：刪除已完成事項

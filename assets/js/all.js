@@ -120,6 +120,9 @@ addBtn.addEventListener("click", function () {
 //事件：刪除所有事項
 const removeAllBtn = document.querySelector(".list_footer a");
 removeAllBtn.addEventListener("click", function () {
-  allData = [];
-  renderData(allData);
+  tempData = tempData.filter((item) => {
+    return item.isDone === false;
+  });
+  console.log(tempData);
+  renderData(tempData);
 });

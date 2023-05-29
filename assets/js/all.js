@@ -25,6 +25,7 @@ function renderData(data) {
   </li>`;
   });
   list.innerHTML = str;
+  console.log(str, data);
 }
 
 function filterUndo(data) {
@@ -48,7 +49,6 @@ filterBtn.addEventListener("click", (e) => {
     e.target.classList.add("active");
   }
   //根據頁籤篩選出資料
-  // tempData = allData;
   if (e.target.textContent === "全部") {
     renderData(tempData);
     filterUndo(tempData);
@@ -70,24 +70,24 @@ filterBtn.addEventListener("click", (e) => {
 });
 
 list.addEventListener("click", function (e) {
-  // console.log(e, e.target.dataset.value);
+  console.log(e.target.nodeName);
   //切換資料狀態
   if (e.target.nodeName === "INPUT") {
     if (e.target.checked) {
-      allData.forEach((item) => {
+      tempData.forEach((item) => {
         if (item.content === e.target.dataset.value) {
           item.isDone = true;
         }
       });
-      filterUndo(allData);
+      filterUndo(tempData);
       renderData(tempData);
     } else if (!e.target.checked) {
-      allData.forEach((item) => {
+      tempData.forEach((item) => {
         if (item.content === e.target.dataset.value) {
           item.isDone = false;
         }
       });
-      filterUndo(allData);
+      filterUndo(tempData);
       renderData(tempData);
     }
   }
@@ -118,11 +118,12 @@ addBtn.addEventListener("click", function () {
   renderData(tempData);
 });
 
-//事件：刪除所有事項
+//事件：刪除已完成事項
 const removeAllBtn = document.querySelector(".list_footer a");
 removeAllBtn.addEventListener("click", function () {
   tempData = tempData.filter((item) => {
     return item.isDone === false;
   });
   renderData(tempData);
+  console.log(tempData);
 });
